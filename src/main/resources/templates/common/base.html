@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" th:fragment="layout(content)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/font-awesome.4.7.0.css}"/>
+    <link rel="stylesheet" th:href="@{/css/datatables.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <title th:text="${title}">Base HTML</title>
+
+</head>
+<body>
+<!--<script th:src="@{/js/chart.js}"></script>-->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/datatables.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+
+
+<div th:replace="/common/navbar::header"></div>
+<div th:replace="${content}"></div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('li.active:not(#pag)').removeClass('active');
+        $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+
+        setTimeout(function () {
+            $('.alert').alert('close');
+        }, 3000);
+
+        // $('#create-check-sheet input').on('change', function () {
+        //     const $input = $(this);
+        //     const isValid = false;
+        //     const inputName = $input.attr('name')
+        //     const inputValue = $input.val()
+        //
+        //
+        //
+        //     $input.css('border', "none")
+        //     if (inputName == 'J7RW') {
+        //         const $parentRow = $input.parent().parent();
+        //        $parentRow.find('td:last').html('<span style="color: red">NOT OK</span>')
+        //         $input.css('border', '1px solid red')
+        //     }
+        //  })
+
+    });
+
+</script>
+</body>
+</html>

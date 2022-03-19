@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="common/base::layout(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8"/>
+</head>
+<body>
+
+<section>
+    <div class="container">
+        <table class="table table-bordered table-responsive-md judgement-table">
+            <thead>
+            <tr>
+                <th scope="col">Joint No</th>
+                <th scope="col">Beam Path (W)</th>
+                <th scope="col">Projection Dist (Y)</th>
+                <th scope="col">Flaw Height (H)</th>
+                <th scope="col">Flaw Depth (D)</th>
+                <th scope="col">Flaw Length (L)</th>
+                <th scope="col">Evaluation Chart (I.E)</th>
+                <th scope="col">Judgment (J)</th>
+                <th scope="col">Defect in Gouging</th>
+                <th scope="col">Sign</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-md-10 col-xs-12">
+                <img th:src="@{/images/jc.png}" class="d-inline-block align-top judgement-img" alt="">
+            </div>
+            <div class="col-md-2 col-xs-12">
+                <a class="btn btn-secondary float-md-right mb-5"
+                   th:href="@{|/check-sheet/judgement-download/${checkSheet.id}|}" style="pointer-events: none;cursor: default"><span>Download</span></a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

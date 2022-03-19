@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="common/base::layout(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8"/>
+
+
+</head>
+<body>
+
+<section>
+    <div class="container">
+        <div class="alert" th:classappend="${session.message.type}" th:if="${session.message}">
+            <p id="form-message" th:text="${session.message.content}"></p>
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+        </div>
+        <table class="table table-responsive-sm table-sm">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Model</th>
+                <th scope="col">Part Name</th>
+                <th scope="col">Part No</th>
+                <th scope="col">Punch No</th>
+                <th scope="col">Original CheckSheet</th>
+                <th scope="col">Revisions</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="c: ${checkSheets}">
+                <th scope="row">
+                    <a th:href="@{|/check-sheet/show/${c.id}|}" th:text="${c.id}" />
+                </th>
+                <td th:text="${c.model}"/>
+                <td th:text="${c.partName}"/>
+                <td th:text="${c.partNumber}"/>
+                <td th:text="${c.punchNumber}"/>
+                <td>
+                    <a th:href="@{|/check-sheet/show/${@checkSheetService.getOriginalSheetId(c.id)}|}" th:text="${@checkSheetService.getOriginalSheetId(c.id)}" />
+                </td>
+                <td>
+                    <span th:each="rv: ${@checkSheetService.getAllRevisions(c.id)}">
+                         <a th:href="@{|/check-sheet/show/${rv.revisionCheckSheetId}|}" th:text="${rv.revisionName}" /><br/>
+                    </span>
+                </td>
+                <td>
+                    <a class="badge badge-info"
+                       th:href="@{|/check-sheet/judgement/${c.id}|}"><span>Judgement</span></a>
+
+                    <!-- ADMIN EDIT-->
+                    <a sec:authorize="hasRole('ADMIN')" class="badge badge-light"
+                       th:href="@{|/check-sheet/edit/${c.id}|}"><span>Edit</span></a>
+
+
+                    <!-- OPERATOR EDIT-->
+                    <span th:if="${5==4}">
+                        <a sec:authorize="hasRole('OPERATOR')" class="badge badge-light"
+                           th:href="@{|/check-sheet/edit/${c.id}|}"><span>Edit</span></a>
+                    </span>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+            <ul th:if="${checkSheetPage.totalPages > 0}" class="pagination">
+                <li th:each="pageNumber : ${pageNumbers}" class="page-item" th:classappend="${pageNumber==checkSheetPage.number + 1} ? active" id="pag">
+                    <a class="page-link"
+                       th:href="@{/templates/checkSheet/list(size=${checkSheetPage.size}, page=${pageNumber})}"
+                       th:text="${pageNumber}"
+                    >1</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</section>
+
+
+</body>
+</html>

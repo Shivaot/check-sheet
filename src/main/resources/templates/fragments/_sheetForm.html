@@ -1,0 +1,297 @@
+<div th:fragment="form(checkSheet, isReadOnly, isEdit)">
+    <form id="create-check-sheet"
+          class="sheet-table"
+          method="post"
+          th:action="${isEdit} ? @{/check-sheet/update} : @{/operator/check-sheet/save}"
+          th:object="${checkSheet}">
+        <input id="id" th:field="*{id}" type="hidden">
+
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+        <div class="row mr-0 ml-0">
+            <div class="col-xs-12 col-md-3 b-a" style="background-color: yellow"></div>
+            <div class="col-xs-12 col-md-6 text-center font-weight-bold b-a">ULTRASONIC EXAMINATION CHECK SHEET</div>
+            <div class="col-xs-12 col-md-3 b-r b-b b-t"></div>
+            <div class="col-xs-12 col-md-3 b-l"></div>
+
+            <div class="col-xs-12 col-md-9">
+                <div class="row">
+                    <div class="col-xs-12 col-md-3 b-l text-center">Model</div>
+                    <div class="col-xs-12 col-md-2 b-l text-center">Part Name</div>
+                    <div class="col-xs-12 col-md-2 b-l text-center">Part No</div>
+                    <div class="col-xs-12 col-md-2 b-l text-center">Punch No.</div>
+                    <div class="col-xs-12 col-md-3 b-l b-r text-center">Date</div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-3 b-l b-b"></div>
+
+            <div class="col-xs-12 col-md-9 b-a">
+                <div class="row">
+                    <div class="col-xs-12 col-md-3">
+                        <select class="form-control" th:field="*{model}" required>
+                            <option value="">Select</option>
+                            <option th:each="m : ${@checkSheetModelRepository.findAll()}" th:value="${m.modelName}" th:text="${m.modelName}"></option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-md-2 b-l">
+                        <select class="form-control" th:field="*{partName}" required>
+                            <option value="">Select</option>
+                            <option th:each="pn : ${@partNameRepository.findAll()}" th:value="${pn.name}" th:text="${pn.name}"></option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-md-2 b-l"><input th:field="*{partNumber}" type="text" required/></div>
+                    <div class="col-xs-12 col-md-2 b-l"><input th:field="*{punchNumber}" type="text" required/></div>
+                    <div class="col-xs-12 col-md-3 b-l b-r"><input th:field="*{dateCreated}" type="date" required/></div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-12 b-l b-r">
+                <div class="row">
+                    <div class="col-md-10 col-xs-12">
+                        <img th:src="@{/images/boom.png}" class="d-inline-block align-top boom-img" alt="">
+                    </div>
+                    <div class="col-md-2 col-xs-12 mt-5">
+                        <table class="table table-bordered table-sm">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 40%">C Hub</td>
+                                    <td><input th:field="*{CHUB}" type="text" required/></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%">F Hub</td>
+                                    <td><input th:field="*{FHUB}" type="text" required/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-responsive-sm table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Joint No</th>
+                <th scope="col">Thickness (t)</th>
+                <th scope="col">Beam Path (W)</th>
+                <th scope="col">Projection Dist (Y)</th>
+                <th scope="col">Flaw Height (H)</th>
+                <th scope="col">Flaw Depth (D)</th>
+                <th scope="col">Flaw Length (L)</th>
+                <th scope="col">Flaw Pitch (P)</th>
+                <th scope="col">Evaluation Chart (I.E)</th>
+                <th scope="col">Judgment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--Joint 1 Begin-->
+            <tr id="test">
+                <th>7R</th>
+                <td class="td-text" rowspan="2">16</td>
+                <td><input th:field="*{J7RW}" type="number" step="any" required/></td>
+                <td><input th:field="*{J7RY}" type="number" step="any" required/></td>
+                <td><input th:field="*{J7RH}" type="number" step="any"/></td>
+                <td><input th:field="*{J7RD}" type="number" step="any"/></td>
+                <td><input th:field="*{J7RL}" type="number" step="any"/></td>
+                <td><input th:field="*{J7RP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J7R_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <tr>
+                <th>12L</th>
+                <td><input th:field="*{J12LW}" type="number" step="any"/></td>
+                <td><input th:field="*{J12LY}" type="number" step="any"/></td>
+                <td><input th:field="*{J12LH}" type="number" step="any"/></td>
+                <td><input th:field="*{J12LD}" type="number" step="any"/></td>
+                <td><input th:field="*{J12LL}" type="number" step="any"/></td>
+                <td><input th:field="*{J12LP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J12L_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 1 End-->
+
+            <!--Joint 2 Begin-->
+            <tr>
+                <th>8R</th>
+                <td class="td-text" rowspan="2">16</td>
+                <td><input th:field="*{J8RW}" type="number" step="any"/></td>
+                <td><input th:field="*{J8RY}" type="number" step="any"/></td>
+                <td><input th:field="*{J8RH}" type="number" step="any"/></td>
+                <td><input th:field="*{J8RD}" type="number" step="any"/></td>
+                <td><input th:field="*{J8RL}" type="number" step="any"/></td>
+                <td><input th:field="*{J8RP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J8R_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <tr>
+                <th>13L</th>
+                <td><input th:field="*{J13LW}" type="number" step="any"/></td>
+                <td><input th:field="*{J13LY}" type="number" step="any"/></td>
+                <td><input th:field="*{J13LH}" type="number" step="any"/></td>
+                <td><input th:field="*{J13LD}" type="number" step="any"/></td>
+                <td><input th:field="*{J13LL}" type="number" step="any"/></td>
+                <td><input th:field="*{J13LP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J13L_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 2 End-->
+
+            <!--Joint 3 Begin-->
+            <tr>
+                <th>11R</th>
+                <td class="td-text" rowspan="2">16</td>
+                <td><input th:field="*{J11RW}" type="number" step="any"/></td>
+                <td><input th:field="*{J11RY}" type="number" step="any"/></td>
+                <td><input th:field="*{J11RH}" type="number" step="any"/></td>
+                <td><input th:field="*{J11RD}" type="number" step="any"/></td>
+                <td><input th:field="*{J11RL}" type="number" step="any"/></td>
+                <td><input th:field="*{J11RP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J11R_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <tr>
+                <th>16L</th>
+                <td><input th:field="*{J16LW}" type="number" step="any"/></td>
+                <td><input th:field="*{J16LY}" type="number" step="any"/></td>
+                <td><input th:field="*{J16LH}" type="number" step="any"/></td>
+                <td><input th:field="*{J16LD}" type="number" step="any"/></td>
+                <td><input th:field="*{J16LL}" type="number" step="any"/></td>
+                <td><input th:field="*{J16LP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J16L_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 3 End-->
+
+            <!--Joint 4 Begin-->
+            <tr>
+                <th>11R</th>
+                <td class="text-center">16X16</td>
+                <td><input th:field="*{J5W}" type="number" step="any"/></td>
+                <td><input th:field="*{J5Y}" type="number" step="any"/></td>
+                <td><input th:field="*{J5H}" type="number" step="any"/></td>
+                <td><input th:field="*{J5D}" type="number" step="any"/></td>
+                <td><input th:field="*{J5L}" type="number" step="any"/></td>
+                <td><input th:field="*{J5P}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J11R_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 4 End-->
+
+            <!--Joint 5 Begin-->
+            <tr>
+                <th>9R</th>
+                <td class="td-text" rowspan="2">16</td>
+                <td><input th:field="*{J9RW}" type="number" step="any"/></td>
+                <td><input th:field="*{J9RY}" type="number" step="any"/></td>
+                <td><input th:field="*{J9RH}" type="number" step="any"/></td>
+                <td><input th:field="*{J9RD}" type="number" step="any"/></td>
+                <td><input th:field="*{J9RL}" type="number" step="any"/></td>
+                <td><input th:field="*{J9RP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J9R_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <tr>
+                <th>14L</th>
+                <td><input th:field="*{J14LW}" type="number" step="any"/></td>
+                <td><input th:field="*{J14LY}" type="number" step="any"/></td>
+                <td><input th:field="*{J14LH}" type="number" step="any"/></td>
+                <td><input th:field="*{J14LD}" type="number" step="any"/></td>
+                <td><input th:field="*{J14LL}" type="number" step="any"/></td>
+                <td><input th:field="*{J14LP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J14L_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 5 End-->
+
+            <!--Joint 6 Begin-->
+            <tr>
+                <th>6</th>
+                <td class="text-center">16</td>
+                <td><input th:field="*{J6W}" type="number" step="any"/></td>
+                <td><input th:field="*{J6Y}" type="number" step="any"/></td>
+                <td><input th:field="*{J6H}" type="number" step="any"/></td>
+                <td><input th:field="*{J6D}" type="number" step="any"/></td>
+                <td><input th:field="*{J6L}" type="number" step="any"/></td>
+                <td><input th:field="*{J6P}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J6_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 6 End-->
+
+            <!--Joint 7 Begin-->
+            <tr>
+                <th>2</th>
+                <td class="text-center">16</td>
+                <td><input th:field="*{J2W}" type="number" step="any"/></td>
+                <td><input th:field="*{J2Y}" type="number" step="any"/></td>
+                <td><input th:field="*{J2H}" type="number" step="any"/></td>
+                <td><input th:field="*{J2D}" type="number" step="any"/></td>
+                <td><input th:field="*{J2L}" type="number" step="any"/></td>
+                <td><input th:field="*{J2P}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J2_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 7 End-->
+
+            <!--Joint 8 Begin-->
+            <tr>
+                <th>10R</th>
+                <td class="td-text" rowspan="2">10</td>
+                <td><input th:field="*{J10RW}" type="number" step="any"/></td>
+                <td><input th:field="*{J10RY}" type="number" step="any"/></td>
+                <td><input th:field="*{J10RH}" type="number" step="any"/></td>
+                <td><input th:field="*{J10RD}" type="number" step="any"/></td>
+                <td><input th:field="*{J10RL}" type="number" step="any"/></td>
+                <td><input th:field="*{J10RP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J10R_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <tr>
+                <th>15L</th>
+                <td><input th:field="*{J15LW}" type="number" step="any"/></td>
+                <td><input th:field="*{J15LY}" type="number" step="any"/></td>
+                <td><input th:field="*{J15LH}" type="number" step="any"/></td>
+                <td><input th:field="*{J15LD}" type="number" step="any"/></td>
+                <td><input th:field="*{J15LL}" type="number" step="any"/></td>
+                <td><input th:field="*{J15LP}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J15L_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 8 End-->
+
+            <!--Joint 9 Begin-->
+            <tr>
+                <th>3</th>
+                <td>16</td>
+                <td><input th:field="*{J3W}" type="number" step="any"/></td>
+                <td><input th:field="*{J3Y}" type="number" step="any"/></td>
+                <td><input th:field="*{J3H}" type="number" step="any"/></td>
+                <td><input th:field="*{J3D}" type="number" step="any"/></td>
+                <td><input th:field="*{J3L}" type="number" step="any"/></td>
+                <td><input th:field="*{J3P}" type="number" step="any"/></td>
+                <td>I.E</td>
+                <td><input th:field="*{J3_JUDGEMENT}" type="text" /></td>
+            </tr>
+            <!--Joint 9 End-->
+
+
+            </tbody>
+        </table>
+
+        <button th:if="${!isReadOnly}" class="btn btn-primary float-md-right mb-5">Submit</button>
+        <a th:if="${isReadOnly}" class="btn btn-secondary float-md-right mb-5"
+           th:href="@{|/check-sheet/report/${checkSheet.id}|}"><span>Report</span></a>
+    </form>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        const isReadOnly = /*[[${isReadOnly}]]*/ 'default';
+
+        if (isReadOnly) {
+            $('#create-check-sheet input').attr('readonly', 'readonly');
+            $('#create-check-sheet select').attr('readonly', 'readonly');
+        }
+
+        /*]]>*/
+    </script>
+</div>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="common/base::layout(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8"/>
+
+
+</head>
+<body>
+
+<section>
+    <div class="container">
+        <div class="alert" th:classappend="${session.message.type}" th:if="${session.message}">
+            <p id="form-message" th:text="${session.message.content}"></p>
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+        </div>
+        <div th:replace="fragments/_sheetForm :: form(${checkSheet}, ${false}, ${false})"></div>
+    </div>
+
+</section>
+
+
+</body>
+</html>

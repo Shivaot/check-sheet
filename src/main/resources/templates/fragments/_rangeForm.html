@@ -1,0 +1,380 @@
+<div th:fragment="form(range)">
+    <form class="sheet-table" method="post" th:action="@{/range/update}" th:object="${range}">
+        <input id="id" th:field="*{id}" type="hidden">
+
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-muted">Min Range Table</h2>
+                <table class="table table-bordered table-responsive-sm table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Joint No</th>
+                        <th scope="col">Thickness (t)</th>
+                        <th scope="col">Beam Path (W)</th>
+                        <th scope="col">Projection Dist (Y)</th>
+                        <th scope="col">Flaw Height (H)</th>
+                        <th scope="col">Flaw Depth (D)</th>
+                        <th scope="col">Flaw Length (L)</th>
+                        <th scope="col">Flaw Pitch (P)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--Joint 1 Begin-->
+                    <tr>
+                        <th>7R</th>
+                        <td class="td-text" rowspan="2">16</td>
+                        <td><input th:field="*{J7RW_MIN}" type="number" step="any" /></td>
+                        <td><input th:field="*{J7RY_MIN}" type="number" step="any" /></td>
+                        <td><input th:field="*{J7RH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J7RD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J7RL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J7RP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>12L</th>
+                        <td><input th:field="*{J12LW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 1 End-->
+
+                    <!--Joint 2 Begin-->
+                    <tr>
+                        <th>8R</th>
+                        <td class="td-text" rowspan="2">16</td>
+                        <td><input th:field="*{J8RW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>13L</th>
+                        <td><input th:field="*{J13LW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 2 End-->
+
+                    <!--Joint 3 Begin-->
+                    <tr>
+                        <th>11R</th>
+                        <td class="td-text" rowspan="2">16</td>
+                        <td><input th:field="*{J11RW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>16L</th>
+                        <td><input th:field="*{J16LW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 3 End-->
+
+                    <!--Joint 4 Begin-->
+                    <tr>
+                        <th>11R</th>
+                        <td class="text-center">16X16</td>
+                        <td><input th:field="*{J5W_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5Y_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5H_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5D_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5L_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5P_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 4 End-->
+
+                    <!--Joint 5 Begin-->
+                    <tr>
+                        <th>9R</th>
+                        <td class="td-text" rowspan="2">16</td>
+                        <td><input th:field="*{J9RW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>14L</th>
+                        <td><input th:field="*{J14LW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 5 End-->
+
+                    <!--Joint 6 Begin-->
+                    <tr>
+                        <th>6</th>
+                        <td class="text-center">16</td>
+                        <td><input th:field="*{J6W_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6Y_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6H_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6D_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6L_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6P_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 6 End-->
+
+                    <!--Joint 7 Begin-->
+                    <tr>
+                        <th>2</th>
+                        <td class="text-center">16</td>
+                        <td><input th:field="*{J2W_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2Y_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2H_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2D_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2L_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2P_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 7 End-->
+
+                    <!--Joint 8 Begin-->
+                    <tr>
+                        <th>10R</th>
+                        <td class="td-text" rowspan="2">10</td>
+                        <td><input th:field="*{J10RW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>15L</th>
+                        <td><input th:field="*{J15LW_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LY_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LH_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LD_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LL_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LP_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 8 End-->
+
+                    <!--Joint 9 Begin-->
+                    <tr>
+                        <th>3</th>
+                        <td>16</td>
+                        <td><input th:field="*{J3W_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3Y_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3H_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3D_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3L_MIN}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3P_MIN}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 9 End-->
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-12" >
+                <h2 class="text-muted">Max Range Table</h2>
+                <table class="table table-bordered table-responsive-sm table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Joint No</th>
+                        <th scope="col">Thickness (t)</th>
+                        <th scope="col">Beam Path (W)</th>
+                        <th scope="col">Projection Dist (Y)</th>
+                        <th scope="col">Flaw Height (H)</th>
+                        <th scope="col">Flaw Depth (D)</th>
+                        <th scope="col">Flaw Length (L)</th>
+                        <th scope="col">Flaw Pitch (P)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--Joint 1 Begin-->
+                    <tr id="test">
+                        <th>7R</th>
+                        <td class="td-text" rowspan="2">16</td>
+                        <td><input th:field="*{J7RW_MAX}" type="number" step="any" /></td>
+                        <td><input th:field="*{J7RY_MAX}" type="number" step="any" /></td>
+                        <td><input th:field="*{J7RH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J7RD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J7RL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J7RP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>12L</th>
+                        <td><input th:field="*{J12LW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J12LP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 1 End-->
+
+                    <!--Joint 2 Begin-->
+                    <tr>
+                        <th>8R</th>
+                        <td class="td-text" rowspan="2">16</td>
+                        <td><input th:field="*{J8RW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J8RP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>13L</th>
+                        <td><input th:field="*{J13LW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J13LP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 2 End-->
+
+                    <!--Joint 3 Begin-->
+                    <tr>
+                        <th>11R</th>
+                        <td class="td-text" rowspan="2">16</td>
+                        <td><input th:field="*{J11RW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J11RP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>16L</th>
+                        <td><input th:field="*{J16LW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J16LP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 3 End-->
+
+                    <!--Joint 4 Begin-->
+                    <tr>
+                        <th>11R</th>
+                        <td class="text-center">16X16</td>
+                        <td><input th:field="*{J5W_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5Y_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5H_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5D_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5L_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J5P_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 4 End-->
+
+                    <!--Joint 5 Begin-->
+                    <tr>
+                        <th>9R</th>
+                        <td class="td-text" rowspan="2">16</td>
+                        <td><input th:field="*{J9RW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J9RP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>14L</th>
+                        <td><input th:field="*{J14LW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J14LP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 5 End-->
+
+                    <!--Joint 6 Begin-->
+                    <tr>
+                        <th>6</th>
+                        <td class="text-center">16</td>
+                        <td><input th:field="*{J6W_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6Y_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6H_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6D_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6L_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J6P_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 6 End-->
+
+                    <!--Joint 7 Begin-->
+                    <tr>
+                        <th>2</th>
+                        <td class="text-center">16</td>
+                        <td><input th:field="*{J2W_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2Y_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2H_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2D_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2L_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J2P_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 7 End-->
+
+                    <!--Joint 8 Begin-->
+                    <tr>
+                        <th>10R</th>
+                        <td class="td-text" rowspan="2">10</td>
+                        <td><input th:field="*{J10RW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J10RP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <tr>
+                        <th>15L</th>
+                        <td><input th:field="*{J15LW_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LY_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LH_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LD_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LL_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J15LP_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 8 End-->
+
+                    <!--Joint 9 Begin-->
+                    <tr>
+                        <th>3</th>
+                        <td>16</td>
+                        <td><input th:field="*{J3W_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3Y_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3H_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3D_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3L_MAX}" type="number" step="any"/></td>
+                        <td><input th:field="*{J3P_MAX}" type="number" step="any"/></td>
+                    </tr>
+                    <!--Joint 9 End-->
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+        <button class="btn btn-primary float-md-right mb-5">Submit</button>
+    </form>
+</div>
