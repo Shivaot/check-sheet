@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 
 /**
  * Shiva Created on 05/03/22
@@ -27,6 +29,8 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws NoSuchFieldException {
+
+        Math.sin(Math.toDegrees(new BigDecimal("12.00").doubleValue()));
 
 //        User user = userRepository.findByEmail("operator@mail.in");
 //        Class email = user.getClass();

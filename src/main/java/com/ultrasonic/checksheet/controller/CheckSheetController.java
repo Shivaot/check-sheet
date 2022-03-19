@@ -1,7 +1,9 @@
 package com.ultrasonic.checksheet.controller;
 
 import com.ultrasonic.checksheet.domain.CheckSheet;
+import com.ultrasonic.checksheet.domain.PartName;
 import com.ultrasonic.checksheet.helper.Message;
+import com.ultrasonic.checksheet.helper.Utils;
 import com.ultrasonic.checksheet.repository.CheckSheetRepository;
 import com.ultrasonic.checksheet.repository.RevisionRepository;
 import com.ultrasonic.checksheet.service.CheckSheetService;
@@ -137,13 +139,14 @@ public class CheckSheetController {
     }
 
     @GetMapping("judgement/{id}")
-    public String getJudgement(@PathVariable("id") Long id, Model model, HttpSession session) {
+    public String getJudgement(@PathVariable("id") Long id, Model model, HttpSession session, Principal principal) {
         Optional<CheckSheet> optionalCheckSheet = checkSheetRepository.findById(id);
         try {
             CheckSheet checkSheet = optionalCheckSheet.get();
             log.info("User viewing judgement with c-id {}", id);
             model.addAttribute("title", "Judgement View");
             model.addAttribute("checkSheet", checkSheet);
+            model.addAttribute("sign", Utils.parseUsername(principal));
             return "checkSheet/judgement";
         } catch (NoSuchElementException ex) {
             log.error("CheckSheet not found ", ex);
@@ -152,6 +155,39 @@ public class CheckSheetController {
         }
     }
 
+    @PostMapping("judgement/save")
+    String saveJudgement(@Valid @ModelAttribute("checkSheet") CheckSheet checkSheet, BindingResult result,
+                  HttpSession session, Model model, Principal principal) {
+        try {
+            if (result.hasErrors()) {
+                log.info("User with ID {}", principal.getName());
+                log.error("Validation error while updating judgement {}", result);
+                model.addAttribute("checkSheet", checkSheet);
+                return "checkSheet/judgement";
+            }
+            Optional<CheckSheet> optionalCheckSheet = checkSheetRepository.findById(checkSheet.getId());
+            if (optionalCheckSheet.isPresent()) {
 
+                CheckSheet savedCheckSheet = checkSheetService.updateWeldorNames(checkSheet, optionalCheckSheet);
+                CheckSheet updatedCheckSheet = checkSheetRepository.save(savedCheckSheet);
+                log.info("User with ID {}", principal.getName());
+                log.info("CheckSheet judgement updated successfully with id {}", savedCheckSheet.getId());
+                model.addAttribute("checkSheet", updatedCheckSheet);
+                session.setAttribute("message", new Message("Successfully Updated Judgement", "alert-success"));
+                return "redirect:/check-sheet/judgement/"+savedCheckSheet.getId();
+            } else {
+                log.info("User with ID {}", principal.getName());
+                log.info("CheckSheet Not found for id {}", checkSheet.getId());
+                session.setAttribute("message", new Message("CheckSheet Not found", "alert-danger"));
+                return "error/404";
+            }
+        } catch (Exception ex) {
+            log.info("User with ID {}", principal.getName());
+            log.error("Error while updating checkSheet judgement", ex);
+            model.addAttribute("checkSheet", checkSheet);
+            session.setAttribute("message", new Message("Something went wrong!! " + ex.getMessage(), "alert-danger"));
+            return "checkSheet/judgement";
+        }
+    }
 
 }

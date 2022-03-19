@@ -136,3 +136,26 @@
 //
 // } )
 //
+
+
+const fillCheckSheet = (object, thickNess) => {
+    const thetaValue = $(object).val();
+    const $nearestBeamPath = $(object).parent().siblings().children('.beam_path');
+    const $nearestProjectionDistance = $(object).parent().siblings().children('.proj_dist');
+    if (thetaValue) {
+        // let thickNess = $(object).parent().parent().children('td:first').html().trim().substr(0,2);
+        const calculatedBeamPath = secDegrees(thetaValue)*thickNess
+        $nearestBeamPath.val(calculatedBeamPath);
+        $nearestProjectionDistance.val((calculatedBeamPath*sinDegrees(thetaValue)).toFixed(2));
+    } else {
+        $nearestBeamPath.val('');
+        $nearestProjectionDistance.val('');
+    }
+}
+
+const sinDegrees = (angleDegrees) =>  Math.sin(angleDegrees*Math.PI/180).toFixed(2)
+
+const secDegrees = (angleDegrees) => (1/Math.cos(angleDegrees*Math.PI/180)).toFixed(2)
+
+const cosDegrees = (angleDegrees) => Math.cos(angleDegrees*Math.PI/180).toFixed(2)
+

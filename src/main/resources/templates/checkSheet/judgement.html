@@ -9,145 +9,17 @@
 <body>
 
 <section>
+
     <div class="container">
-        <table class="table table-bordered table-responsive-md judgement-table">
-            <thead>
-            <tr>
-                <th scope="col">Joint No</th>
-                <th scope="col">Beam Path (W)</th>
-                <th scope="col">Projection Dist (Y)</th>
-                <th scope="col">Flaw Height (H)</th>
-                <th scope="col">Flaw Depth (D)</th>
-                <th scope="col">Flaw Length (L)</th>
-                <th scope="col">Evaluation Chart (I.E)</th>
-                <th scope="col">Judgment (J)</th>
-                <th scope="col">Defect in Gouging</th>
-                <th scope="col">Sign</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div class="row">
-            <div class="col-md-10 col-xs-12">
-                <img th:src="@{/images/jc.png}" class="d-inline-block align-top judgement-img" alt="">
-            </div>
-            <div class="col-md-2 col-xs-12">
-                <a class="btn btn-secondary float-md-right mb-5"
-                   th:href="@{|/check-sheet/judgement-download/${checkSheet.id}|}" style="pointer-events: none;cursor: default"><span>Download</span></a>
-            </div>
-
+        <div class="alert" th:classappend="${session.message.type}" th:if="${session.message}">
+            <p id="form-message" th:text="${session.message.content}"></p>
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
         </div>
-
+        <a style="font-size: 40px" class="float-left"
+           th:href="@{|/check-sheet/show/${checkSheet.id}|}">
+            ←
+        </a>
+        <div th:replace="fragments/_judgementForm :: form(${checkSheet})"></div>
     </div>
 </section>
 

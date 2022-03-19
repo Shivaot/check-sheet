@@ -48,9 +48,6 @@
                     </span>
                 </td>
                 <td>
-                    <a class="badge badge-info"
-                       th:href="@{|/check-sheet/judgement/${c.id}|}"><span>Judgement</span></a>
-
                     <!-- ADMIN EDIT-->
                     <a sec:authorize="hasRole('ADMIN')" class="badge badge-light"
                        th:href="@{|/check-sheet/edit/${c.id}|}"><span>Edit</span></a>
@@ -71,7 +68,7 @@
             <ul th:if="${checkSheetPage.totalPages > 0}" class="pagination">
                 <li th:each="pageNumber : ${pageNumbers}" class="page-item" th:classappend="${pageNumber==checkSheetPage.number + 1} ? active" id="pag">
                     <a class="page-link"
-                       th:href="@{/templates/checkSheet/list(size=${checkSheetPage.size}, page=${pageNumber})}"
+                       th:href="@{/check-sheet/list(size=${checkSheetPage.size}, page=${pageNumber})}"
                        th:text="${pageNumber}"
                     >1</a>
                 </li>

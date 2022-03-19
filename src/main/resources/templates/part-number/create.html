@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="common/base::layout(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8"/>
+
+
+</head>
+<body>
+
+<section>
+    <div class="container form-box">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="my-card mt-3">
+
+                    <div class="alert" th:classappend="${session.message.type}" th:if="${session.message}">
+                        <p id="form-message" th:text="${session.message.content}"></p>
+                        <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                    </div>
+
+                    <h3 class="text-center text-muted">Enter Details</h3>
+                    <br/><br/>
+
+                    <form action="" id="create-part-number" method="post" th:action="@{/part-number/save}" th:object="${partNumber}">
+                        <div class="form-group">
+                            <label for="partNumber">Part Number</label>
+                            <input class="form-control" th:classappend="${#fields.hasErrors('partNumber') ? 'is-invalid':''}"
+                                   id="partNumber" name="partNumber" th:value="${partNumber.partNumber}" type="text">
+                            <div class="invalid-feedback" th:each="e: ${#fields.errors('partNumber')}" th:text="${e}"></div>
+                        </div>
+
+                        <button class="btn btn-primary">Submit</button>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+</body>
+</html>

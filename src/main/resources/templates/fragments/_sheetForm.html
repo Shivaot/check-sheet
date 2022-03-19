@@ -41,7 +41,12 @@
                             <option th:each="pn : ${@partNameRepository.findAll()}" th:value="${pn.name}" th:text="${pn.name}"></option>
                         </select>
                     </div>
-                    <div class="col-xs-12 col-md-2 b-l"><input th:field="*{partNumber}" type="text" required/></div>
+                    <div class="col-xs-12 col-md-2 b-l">
+                        <select class="form-control" th:field="*{partNumber}" required>
+                            <option value="">Select</option>
+                            <option th:each="pn : ${@partNumberRepository.findAll()}" th:value="${pn.partNumber}" th:text="${pn.partNumber}"></option>
+                        </select>
+                    </div>
                     <div class="col-xs-12 col-md-2 b-l"><input th:field="*{punchNumber}" type="text" required/></div>
                     <div class="col-xs-12 col-md-3 b-l b-r"><input th:field="*{dateCreated}" type="date" required/></div>
                 </div>
@@ -73,40 +78,75 @@
             <tr>
                 <th scope="col">Joint No</th>
                 <th scope="col">Thickness (t)</th>
+                <th style="padding: 0 10px" scope="col">Theta (0)</th>
                 <th scope="col">Beam Path (W)</th>
                 <th scope="col">Projection Dist (Y)</th>
                 <th scope="col">Flaw Height (H)</th>
                 <th scope="col">Flaw Depth (D)</th>
                 <th scope="col">Flaw Length (L)</th>
                 <th scope="col">Flaw Pitch (P)</th>
-                <th scope="col">Evaluation Chart (I.E)</th>
+                <th scope="col">(I.E)</th>
                 <th scope="col">Judgment</th>
             </tr>
             </thead>
             <tbody>
             <!--Joint 1 Begin-->
-            <tr id="test">
+            <tr>
                 <th>7R</th>
                 <td class="td-text" rowspan="2">16</td>
-                <td><input th:field="*{J7RW}" type="number" step="any" required/></td>
-                <td><input th:field="*{J7RY}" type="number" step="any" required/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J7R_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J7RW}" type="number" step="any" /></td>
+                <td><input class="proj_dist" th:field="*{J7RY}" type="number" step="any" /></td>
                 <td><input th:field="*{J7RH}" type="number" step="any"/></td>
                 <td><input th:field="*{J7RD}" type="number" step="any"/></td>
                 <td><input th:field="*{J7RL}" type="number" step="any"/></td>
                 <td><input th:field="*{J7RP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J7R_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J7R_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J7R_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <th>12L</th>
-                <td><input th:field="*{J12LW}" type="number" step="any"/></td>
-                <td><input th:field="*{J12LY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J12L_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J12LW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J12LY}" type="number" step="any"/></td>
                 <td><input th:field="*{J12LH}" type="number" step="any"/></td>
                 <td><input th:field="*{J12LD}" type="number" step="any"/></td>
                 <td><input th:field="*{J12LL}" type="number" step="any"/></td>
                 <td><input th:field="*{J12LP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J12L_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J12L_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J12L_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 1 End-->
 
@@ -114,25 +154,59 @@
             <tr>
                 <th>8R</th>
                 <td class="td-text" rowspan="2">16</td>
-                <td><input th:field="*{J8RW}" type="number" step="any"/></td>
-                <td><input th:field="*{J8RY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J8R_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J8RW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J8RY}" type="number" step="any"/></td>
                 <td><input th:field="*{J8RH}" type="number" step="any"/></td>
                 <td><input th:field="*{J8RD}" type="number" step="any"/></td>
                 <td><input th:field="*{J8RL}" type="number" step="any"/></td>
                 <td><input th:field="*{J8RP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J8R_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J8R_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J8R_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <th>13L</th>
-                <td><input th:field="*{J13LW}" type="number" step="any"/></td>
-                <td><input th:field="*{J13LY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J13L_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J13LW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J13LY}" type="number" step="any"/></td>
                 <td><input th:field="*{J13LH}" type="number" step="any"/></td>
                 <td><input th:field="*{J13LD}" type="number" step="any"/></td>
                 <td><input th:field="*{J13LL}" type="number" step="any"/></td>
                 <td><input th:field="*{J13LP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J13L_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J13L_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J13L_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 2 End-->
 
@@ -140,40 +214,91 @@
             <tr>
                 <th>11R</th>
                 <td class="td-text" rowspan="2">16</td>
-                <td><input th:field="*{J11RW}" type="number" step="any"/></td>
-                <td><input th:field="*{J11RY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J11R_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J11RW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J11RY}" type="number" step="any"/></td>
                 <td><input th:field="*{J11RH}" type="number" step="any"/></td>
                 <td><input th:field="*{J11RD}" type="number" step="any"/></td>
                 <td><input th:field="*{J11RL}" type="number" step="any"/></td>
                 <td><input th:field="*{J11RP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J11R_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J11R_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J11R_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <th>16L</th>
-                <td><input th:field="*{J16LW}" type="number" step="any"/></td>
-                <td><input th:field="*{J16LY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J16L_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J16LW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J16LY}" type="number" step="any"/></td>
                 <td><input th:field="*{J16LH}" type="number" step="any"/></td>
                 <td><input th:field="*{J16LD}" type="number" step="any"/></td>
                 <td><input th:field="*{J16LL}" type="number" step="any"/></td>
                 <td><input th:field="*{J16LP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J16L_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J16L_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J16L_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 3 End-->
 
             <!--Joint 4 Begin-->
             <tr>
-                <th>11R</th>
+                <th>5</th>
                 <td class="text-center">16X16</td>
-                <td><input th:field="*{J5W}" type="number" step="any"/></td>
-                <td><input th:field="*{J5Y}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J5_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J5W}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J5Y}" type="number" step="any"/></td>
                 <td><input th:field="*{J5H}" type="number" step="any"/></td>
                 <td><input th:field="*{J5D}" type="number" step="any"/></td>
                 <td><input th:field="*{J5L}" type="number" step="any"/></td>
                 <td><input th:field="*{J5P}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J11R_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J5_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J5_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 4 End-->
 
@@ -181,25 +306,59 @@
             <tr>
                 <th>9R</th>
                 <td class="td-text" rowspan="2">16</td>
-                <td><input th:field="*{J9RW}" type="number" step="any"/></td>
-                <td><input th:field="*{J9RY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J9R_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J9RW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J9RY}" type="number" step="any"/></td>
                 <td><input th:field="*{J9RH}" type="number" step="any"/></td>
                 <td><input th:field="*{J9RD}" type="number" step="any"/></td>
                 <td><input th:field="*{J9RL}" type="number" step="any"/></td>
                 <td><input th:field="*{J9RP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J9R_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J9R_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J9R_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <th>14L</th>
-                <td><input th:field="*{J14LW}" type="number" step="any"/></td>
-                <td><input th:field="*{J14LY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J14L_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J14LW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J14LY}" type="number" step="any"/></td>
                 <td><input th:field="*{J14LH}" type="number" step="any"/></td>
                 <td><input th:field="*{J14LD}" type="number" step="any"/></td>
                 <td><input th:field="*{J14LL}" type="number" step="any"/></td>
                 <td><input th:field="*{J14LP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J14L_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J14L_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J14L_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 5 End-->
 
@@ -207,14 +366,31 @@
             <tr>
                 <th>6</th>
                 <td class="text-center">16</td>
-                <td><input th:field="*{J6W}" type="number" step="any"/></td>
-                <td><input th:field="*{J6Y}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J6_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J6W}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J6Y}" type="number" step="any"/></td>
                 <td><input th:field="*{J6H}" type="number" step="any"/></td>
                 <td><input th:field="*{J6D}" type="number" step="any"/></td>
                 <td><input th:field="*{J6L}" type="number" step="any"/></td>
                 <td><input th:field="*{J6P}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J6_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J6_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J6_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 6 End-->
 
@@ -222,14 +398,31 @@
             <tr>
                 <th>2</th>
                 <td class="text-center">16</td>
-                <td><input th:field="*{J2W}" type="number" step="any"/></td>
-                <td><input th:field="*{J2Y}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J2_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J2W}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J2Y}" type="number" step="any"/></td>
                 <td><input th:field="*{J2H}" type="number" step="any"/></td>
                 <td><input th:field="*{J2D}" type="number" step="any"/></td>
                 <td><input th:field="*{J2L}" type="number" step="any"/></td>
                 <td><input th:field="*{J2P}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J2_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J2_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J2_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 7 End-->
 
@@ -237,25 +430,59 @@
             <tr>
                 <th>10R</th>
                 <td class="td-text" rowspan="2">10</td>
-                <td><input th:field="*{J10RW}" type="number" step="any"/></td>
-                <td><input th:field="*{J10RY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 10)" th:field="*{J10R_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J10RW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J10RY}" type="number" step="any"/></td>
                 <td><input th:field="*{J10RH}" type="number" step="any"/></td>
                 <td><input th:field="*{J10RD}" type="number" step="any"/></td>
                 <td><input th:field="*{J10RL}" type="number" step="any"/></td>
                 <td><input th:field="*{J10RP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J10R_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J10R_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J10R_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <th>15L</th>
-                <td><input th:field="*{J15LW}" type="number" step="any"/></td>
-                <td><input th:field="*{J15LY}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 10)" th:field="*{J15L_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J15LW}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J15LY}" type="number" step="any"/></td>
                 <td><input th:field="*{J15LH}" type="number" step="any"/></td>
                 <td><input th:field="*{J15LD}" type="number" step="any"/></td>
                 <td><input th:field="*{J15LL}" type="number" step="any"/></td>
                 <td><input th:field="*{J15LP}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J15L_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J15L_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J15L_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 8 End-->
 
@@ -263,14 +490,31 @@
             <tr>
                 <th>3</th>
                 <td>16</td>
-                <td><input th:field="*{J3W}" type="number" step="any"/></td>
-                <td><input th:field="*{J3Y}" type="number" step="any"/></td>
+                <td><input class="theta" onkeyup="fillCheckSheet(this, 16)" th:field="*{J3_Theta}" type="number" step="any" /></td>
+                <td><input class="beam_path" th:field="*{J3W}" type="number" step="any"/></td>
+                <td><input class="proj_dist" th:field="*{J3Y}" type="number" step="any"/></td>
                 <td><input th:field="*{J3H}" type="number" step="any"/></td>
                 <td><input th:field="*{J3D}" type="number" step="any"/></td>
                 <td><input th:field="*{J3L}" type="number" step="any"/></td>
                 <td><input th:field="*{J3P}" type="number" step="any"/></td>
-                <td>I.E</td>
-                <td><input th:field="*{J3_JUDGEMENT}" type="text" /></td>
+                <td>
+                    <select class="form-control" th:field="*{J3_IE}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.IE).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">I.E
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{J3_JUDGEMENT}" >
+                        <option value="">Select</option>
+                        <option th:each="o : ${T(com.ultrasonic.checksheet.enums.OkNotOk).values()}"
+                                th:text="${o.displayValue}"
+                                th:value="${o}">Ok
+                        </option>
+                    </select>
+                </td>
             </tr>
             <!--Joint 9 End-->
 
@@ -279,8 +523,9 @@
         </table>
 
         <button th:if="${!isReadOnly}" class="btn btn-primary float-md-right mb-5">Submit</button>
+
         <a th:if="${isReadOnly}" class="btn btn-secondary float-md-right mb-5"
-           th:href="@{|/check-sheet/report/${checkSheet.id}|}"><span>Report</span></a>
+           th:href="@{|/check-sheet/judgement/${checkSheet.id}|}"><span>Judgement</span></a>
     </form>
     <script th:inline="javascript">
         /*<![CDATA[*/
