@@ -21,24 +21,24 @@ public class OperatorService {
     }
 
     public Page<CheckSheet> findPaginated(Pageable pageable) {
-        List<CheckSheet> checkSheets = checkSheetRepository.findAllByIsCurrentRevisionOrderByIdDesc(true);
+        Page<CheckSheet> checkSheets = checkSheetRepository.findAllByIsCurrentRevisionOrderByIdDesc(true, pageable);
 
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<CheckSheet> list;
+//        int pageSize = pageable.getPageSize();
+//        int currentPage = pageable.getPageNumber();
+//        int startItem = currentPage * pageSize;
+//        List<CheckSheet> list;
+//
+//        if (checkSheets.getContent().size() < startItem) {
+//            list = Collections.emptyList();
+//        } else {
+//            int toIndex = Math.min(startItem + pageSize, checkSheets.getContent().size());
+//            list = checkSheets.getContent().subList(startItem, toIndex);
+//        }
+//
+//        Page<CheckSheet> checkSheetPage
+//                = new PageImpl<CheckSheet>(list, PageRequest.of(currentPage, pageSize), checkSheets.getContent().size());
 
-        if (checkSheets.size() < startItem) {
-            list = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, checkSheets.size());
-            list = checkSheets.subList(startItem, toIndex);
-        }
-
-        Page<CheckSheet> checkSheetPage
-                = new PageImpl<CheckSheet>(list, PageRequest.of(currentPage, pageSize), checkSheets.size());
-
-        return checkSheetPage;
+        return checkSheets;
     }
 
 }
